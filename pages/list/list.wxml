@@ -1,0 +1,31 @@
+<!--index.wxml-->
+<view>
+  <view>
+    <l-notice-bar wx:if="{{keyList.length==0}}" front-icon-name="notification" show="{{true}}"
+      swip-arr="请输入主密码，所有加密解密都会以此为基础，支持指纹验证">
+      您尚未保存密码，请点击右下角添加按钮添加密码信息。
+    </l-notice-bar>
+   
+
+
+
+    <l-slide-view height="500" width="750" slide-width="340" wx:for="{{keyList}}" wx:key="item">
+      <view slot="left" class="left">
+        <l-card type="primary" describe="重要" plaintext="{{true}}" l-class="card" title="{{item.KeyName}}">
+        <l-input label="账号" value="{{item.Account}}" placeholder="请输入账号" />
+        <l-input label="密码" value="{{item.Password}}" placeholder="密码" />
+        <l-input label="url" value="{{item.Url}}" placeholder="请输入用户名" />
+        <l-input label="备注" value="{{item.Back}}" placeholder="请输入用户名" />
+      </l-card>
+      </view>
+      <view slot="right" class="right">
+        <l-button type="success" bindtap="update" data-id="{{item.ID}}">编辑</l-button>
+        <l-button type="error" bindtap="delete" data-id="{{item.ID}}">删除</l-button>
+      </view>
+    </l-slide-view>
+
+    <!-- 添加按钮 -->
+    <l-button bindtap="add" icon="add" icon-size="70" size="medium" class="btn_hidden" bg-color="#fff"
+      shape="semicircle"></l-button>
+  </view>
+</view>

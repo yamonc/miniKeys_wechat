@@ -17,14 +17,14 @@
 .usermotto {
   margin-top: 200px;
 }
-.capsule-bar-bg {
-  width:100%;
-  position:fixed;
-  top:0;
-  left:0;
-}
-.l-form-btn-class{
-  display: flex;
-  justify-content: space-around;
-  margin-top: 10rpx;
+
+.btn_hidden {
+  float: right;
+  border: none!important;
+  position: fixed;
+  width: 42px;
+  height: 42px;
+  bottom: 30px;
+  right: 20px;
+  background-color: #fff;
 }

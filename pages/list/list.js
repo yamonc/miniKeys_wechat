@@ -1,7 +1,7 @@
 // index.js
 // 获取应用实例
 const app = getApp()
-import deviceUtil from "../../miniprogram_npm/lin-ui/utils/device-util"
+
 Page({
   data: {
     motto: 'Hello World',
@@ -10,71 +10,59 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
-    capsuleBarHeight: deviceUtil.getNavigationBarHeight(),
-    list: [
-      {
-        pagePath: "/pages/index/index",
-        text: "首页",
-        iconPath: "/icons/tab-bar/index.png",
-        selectedIconPath: "../../miniprogram_npm/lin-ui/icons/tab-bar/index-selected.png"
-      }
-    ],
-    password: ''
+    keyList: []
   },
-
-  //登录
-  submit:function(e) {
-    // wx.navigateTo({
-    //   url: '/pages/list/list'
-    // })
-    const that = this
-    if (e.detail.values.password.length===0){
-      wx.showToast({
-        title: '输入密码不能为空，请重试！',
-        icon: 'none',
-        // image:'/assets/img/warning.jpg',
-        duration: 2000
-      })
-      return 
-    }
+  //删除钥匙
+  delete(e){
+    var that = this
+    const id = e.currentTarget.dataset.id
     wx.request({
-      url: app.globalData.base + '/user/login',
-      method: 'POST',
-      data: {
-        password: e.detail.values.password
-      },
+      url: app.globalData.base + '/key/delete/'+id,
+      method: 'GET',
       header: {
-        'content-type': 'application/x-www-form-urlencoded'
+        'content-type': 'application/json'
       },
       success(res) {
         console.log(res)
-        wx.setStorageSync('userId', res.data.id)
-        if(res.data.error){
+        if (res.data !== true) {
+          //保存失败
           wx.showToast({
-            title: '没有对应的密码信息，请重试！',
+            title: '删除失败，请重试！',
             icon: 'none',
             // image:'/assets/img/warning.jpg',
             duration: 2000
           })
-        }else{
-          if (res.statusCode == 200) {
-            wx.setStorageSync('userId', res.data.id);
-            wx.navigateTo({
-              url: '/pages/list/list'
-            })
-          } else if (res.statusCode == 500) {
-            wx.showToast({
-              title: '服务器错误，请重试！',
-              icon: 'none',
-              // image:'/assets/img/warning.jpg',
-              duration: 2000
-            })
-          }
+        } else {
+          //保存成功，返回首页
+          wx.showToast({
+            title: '删除成功！',
+            icon: 'none',
+            // image:'/assets/img/warning.jpg',
+            duration: 2000,
+            success: function () {
+              setTimeout(function () {
+                //要延时执行的代码
+                that.onLoad()
+              }, 2000)
+            }
+          })
         }
       },
       fail(res) {
         console.log(res)
       }
+    })
+  },
+  update(e){
+    const id = e.currentTarget.dataset.id
+    wx.setStorageSync('keyId', id)
+    wx.navigateTo({
+      url: '/pages/update/update',
+    })
+  },
+  add() {
+    wx.navigateTo({
+      url: '/pages/add/add',
     })
   },
   // 事件处理函数
@@ -84,12 +72,27 @@ Page({
     })
   },
   onLoad() {
-    wx.lin.initValidateForm(this)
+    var that = this
+
     if (wx.getUserProfile) {
       this.setData({
         canIUseGetUserProfile: true
       })
     }
+    const userId = wx.getStorageSync('userId')
+    wx.request({
+      url: app.globalData.base + '/key/getAll/'+userId,
+      method: "GET",
+      header: {
+        'content-type': 'application/json'
+      },
+      success(res) {
+        console.log(res)
+        that.setData({
+          keyList: res.data
+        })
+      }
+    })
   },
   getUserProfile(e) {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗

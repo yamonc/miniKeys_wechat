@@ -1,7 +1,23 @@
 {
+  "tabBar": {
+    "custom": true,
+    "color": "#000000",
+    "selectedColor": "#000000",
+    "backgroundColor": "#000000",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "组件"
+    }, {
+      "pagePath": "pages/index/index",
+      "text": "接口"
+    }]
+  },
   "pages":[
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/list/list",
+    "pages/add/add",
+    "pages/update/update"
   ],
   "window":{
     "backgroundTextStyle":"light",

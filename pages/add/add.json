@@ -9,6 +9,5 @@
     "l-tab-bar":"/miniprogram_npm/lin-ui/tab-bar/index",
     "l-form":"/miniprogram_npm/lin-ui/form/index",
     "l-form-item":"/miniprogram_npm/lin-ui/form-item/index"
-  },
-  "navigationStyle":"custom"
+  }
 }

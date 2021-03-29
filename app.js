@@ -14,6 +14,19 @@ App({
     })
   },
   globalData: {
-    userInfo: null
-  }
+    userInfo: null,
+    tabBarSelected:0,
+    theme: 'light', // dark
+    resultLists:[],
+    resultNumbers:-1,
+    selectIndex:-1,
+    base:"http://localhost:8080",
+    inventPrincipleSelectId:0,
+    physicalConflictsSelectedId:1,
+    materialFieldAnalysisId:'',
+    commonFunctionSearchEffectName:'',
+    moduleNumber: '',
+    routeNumber: '',
+    stateNumber: '',
+  },
 })

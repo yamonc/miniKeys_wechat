@@ -17,11 +17,16 @@
 .usermotto {
   margin-top: 200px;
 }
-.capsule-bar-bg {
-  width:100%;
-  position:fixed;
-  top:0;
-  left:0;
+
+.btn_hidden {
+  float: right;
+  border: none!important;
+  position: fixed;
+  width: 42px;
+  height: 42px;
+  bottom: 30px;
+  right: 20px;
+  background-color: #fff;
 }
 .l-form-btn-class{
   display: flex;

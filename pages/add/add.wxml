@@ -1,0 +1,39 @@
+<!--index.wxml-->
+<view>
+  <view>
+
+    <l-card type="primary" describe="重要" plaintext="{{true}}" l-class="card" title="钥匙信息">
+
+      <l-form name="keyInfo" l-form-btn-class="l-form-btn-class" bind:linsubmit="submit">
+        <l-form-item label="钥匙名称:" name="keyName">
+          <l-input id="keyName" value="{{keyInfo.keyName}}" hide-label show-row="{{false}}" />
+        </l-form-item>
+
+        <l-form-item label="账号:" name="account">
+          <l-input id="account" value="{{keyInfo.account}}" hide-label show-row="{{false}}" />
+        </l-form-item>
+
+        <l-form-item label="密码:" name="password">
+          <l-input id="password" value="{{keyInfo.password}}" hide-label show-row="{{false}}" />
+        </l-form-item>
+
+        <l-form-item label="URL:" name="url">
+          <l-input id="url" value="{{keyInfo.url}}" hide-label show-row="{{false}}" />
+        </l-form-item>
+
+        <l-form-item label="备注:" name="back">
+          <l-input id="back" value="{{keyInfo.back}}" hide-label show-row="{{false}}" />
+        </l-form-item>
+
+        <view slot="submit">
+          <l-button>提交</l-button>
+        </view>
+        <view slot="reset">
+          <l-button type="default" plain>重置</l-button>
+        </view>
+      </l-form>
+    </l-card>
+
+
+  </view>
+</view>
